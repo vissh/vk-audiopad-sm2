@@ -2,88 +2,8 @@
 <head>
 	<title>VK Audiopad Remote Soundmanager2</title>
 	<script type="text/javascript" src="js/soundmanager2.min.js"></script>
-	<script type="text/javascript">
-
-		var addEvent = window.addEventListener ? 
-			function(elem, evType, fn){
-				elem.addEventListener(evType, fn, false);
-				return fn;
-			}:
-			function(elem, evType, fn){
-				elem.attachEvent('on' + evType, fn);
-				return fn;
-			};
-
-		var getDefaultView = function(d) {
-			return d.defaultView || d.parentWindow
-		};
-		
-		var domReady = function(d, callback){
-			if (d.readyState == 'complete' || d.readyState == 'loaded'){
-				setTimeout(callback, 30);
-			} else{
-				var done;
-				var f = function(){
-					if (!done){
-						done = true;
-						callback();
-						
-					}
-				};
-				addEvent(getDefaultView(d), 'load', f);
-				addEvent(d, 'DOMContentLoaded', f);
-			}
-		};
-		
-		var sm2,
-			iframed = window.parent != window;
-
-		var sm2Loaded = function (soundManager) {
-			if (soundManager){
-				sm2 = soundManager;
-			} else {
-				// послать ошибку
-			}
-
-			window.parent.postMessage('atata', '*');
-
-		};
-
-		(function() {
-			var sm2opts = {
-				flashVersion : 9,
-				useFlashBlock : true,
-				debugMode : true,
-				debugFlash: true,
-				wmode : 'opaque',
-				useHighPerformance : true
-			};
-			
-			soundManager = new SoundManager('swf', false, sm2opts);
-			soundManager.onready(function() {
-				if (soundManager.supported()) {
-					console.log('sm2 ok')
-					sm2Loaded(soundManager);
-				} else {
-					sm2Loaded();
-					console.error('sm2 notok')
-			
-				}
-			});
-			
-			var doc = window.document;
-			domReady(doc, function () {
-				doc.body.appendChild(soundManager.getC());
-				soundManager.appended();
-				window.parent.postMessage('atata', '*');
-			});
-			
-		})();
-
-	</script>
+	<script type="text/javascript" src="js/index.js?q=1"></script>
 </head>
-
 <body>
-
 </body>
 </html>
